@@ -1,0 +1,39 @@
+{
+  "pair": {
+    "title": "Ajouter une région MeteoAlarm",
+    "country": {
+      "label": "Pays",
+      "placeholder": "ex. denmark",
+      "hint": "Nom anglais du pays, en minuscules et séparé par des tirets - exactement comme indiqué sur https://feeds.meteoalarm.org/ (ex. « bosnia-herzegovina »)."
+    },
+    "province": {
+      "label": "Province",
+      "placeholder": "ex. Hovedstaden",
+      "hint": "Nom de la province/région tel qu'il apparaît dans le flux de ce pays. Cela ne peut pas être entièrement vérifié ici - MeteoAlarm ne répertorie une région dans le flux que lorsqu'elle a une alerte active, donc par temps calme il n'y a rien à vérifier. Vérifiez l'orthographe exacte sur https://saratoga-weather.org/meteoalarm-map/ (explorateur de régions EMMA_ID) en cas de doute."
+    },
+    "language": {
+      "label": "Langue",
+      "placeholder": "ex. en, en-GB, da, da-DK",
+      "hint": "Code de langue ISO pour le texte de l'alerte. Recherché comme sous-chaîne, donc « da » correspond aussi à « da-DK ». Laissez « en » pour l'anglais."
+    },
+    "name": {
+      "label": "Nom (facultatif)",
+      "placeholder": "Nom d'appareil personnalisé"
+    },
+    "continue": "Continuer",
+    "error": {
+      "fillBoth": "Veuillez renseigner à la fois le pays et la province.",
+      "validateFailed": "Validation impossible : ",
+      "unrecognizedCountry": "Pays non reconnu « {{country}} » - vérifiez l'orthographe sur feeds.meteoalarm.org.",
+      "generic": "Erreur : "
+    },
+    "info": {
+      "matchFound": "Correspondance trouvée - « {{areaDesc}} » a actuellement une alerte active.",
+      "noActiveAlerts": "Pays reconnu. Aucune région de {{country}} n'a actuellement d'alerte active, le nom de la province n'a donc pas pu être vérifié - votre saisie est conservée telle quelle.",
+      "noMatch": "Pays reconnu, mais « {{province}} » ne correspond à aucune des {{count}} région(s) ayant actuellement une alerte active. Cela peut simplement signifier que votre région connaît un temps calme - votre saisie est conservée telle quelle."
+    },
+    "suggestions": {
+      "summary": "{{count}} région(s) ont actuellement une alerte active dans ce pays - appuyez sur l'une d'elles pour l'utiliser"
+    }
+  }
+}

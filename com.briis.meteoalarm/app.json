@@ -1,6 +1,6 @@
 {
   "id": "com.briis.meteoalarm",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "compatibility": ">=8.0.0",
   "sdk": 3,
   "platforms": [

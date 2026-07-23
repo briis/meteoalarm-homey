@@ -1,0 +1,39 @@
+{
+  "pair": {
+    "title": "Añadir una región de MeteoAlarm",
+    "country": {
+      "label": "País",
+      "placeholder": "p. ej. denmark",
+      "hint": "Nombre del país en inglés, en minúsculas y separado por guiones - exactamente como aparece en https://feeds.meteoalarm.org/ (p. ej. \"bosnia-herzegovina\")."
+    },
+    "province": {
+      "label": "Provincia",
+      "placeholder": "p. ej. Hovedstaden",
+      "hint": "Nombre de la provincia/región tal como aparece en el feed de ese país. Esto no se puede verificar completamente aquí - MeteoAlarm solo incluye una región en el feed mientras tiene un aviso activo, así que durante el tiempo tranquilo no hay nada con qué comparar. Verifica la ortografía exacta en https://saratoga-weather.org/meteoalarm-map/ (explorador de regiones EMMA_ID) si tienes dudas."
+    },
+    "language": {
+      "label": "Idioma",
+      "placeholder": "p. ej. en, en-GB, da, da-DK",
+      "hint": "Código de idioma ISO para el texto del aviso. Se compara como subcadena, por lo que \"da\" también coincide con \"da-DK\". Deja \"en\" para inglés."
+    },
+    "name": {
+      "label": "Nombre (opcional)",
+      "placeholder": "Nombre de dispositivo personalizado"
+    },
+    "continue": "Continuar",
+    "error": {
+      "fillBoth": "Por favor, completa tanto el país como la provincia.",
+      "validateFailed": "No se pudo validar: ",
+      "unrecognizedCountry": "País no reconocido \"{{country}}\" - comprueba la ortografía en feeds.meteoalarm.org.",
+      "generic": "Error: "
+    },
+    "info": {
+      "matchFound": "Coincidencia encontrada - \"{{areaDesc}}\" tiene actualmente un aviso activo.",
+      "noActiveAlerts": "País reconocido. Ninguna región de {{country}} tiene actualmente un aviso activo, por lo que el nombre de la provincia no se pudo verificar - se continúa con tu entrada tal cual.",
+      "noMatch": "País reconocido, pero \"{{province}}\" no coincidió con ninguna de las {{count}} región(es) con un aviso activo en este momento. Esto puede significar simplemente que tu región tiene tiempo tranquilo - se continúa con tu entrada tal cual."
+    },
+    "suggestions": {
+      "summary": "{{count}} región(es) tienen actualmente un aviso activo en este país - toca una para usarla"
+    }
+  }
+}
