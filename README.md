@@ -1,4 +1,4 @@
-# <img src="https://raw.githubusercontent.com/briis/meteoalarm-homey/refs/heads/main/com.briis.meteoalarm/drivers/region/assets/images/small.png" width="40" align="middle" alt="logo"> MeteoAlarm for Homey
+# <img src="https://raw.githubusercontent.com/briis/meteoalarm-homey/refs/heads/main/com.briis.meteoalarm/drivers/region/assets/images/small.png" width="48" align="center" alt="logo"> MeteoAlarm for Homey
 
 A [Homey](https://homey.app) app that brings European weather warnings from
 [MeteoAlarm](https://meteoalarm.org) (EUMETNET) into Homey — as a device
