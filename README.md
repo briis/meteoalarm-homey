@@ -1,13 +1,9 @@
-# meteoalarm-homey
+# ![logo](https://raw.githubusercontent.com/briis/meteoalarm-homey/refs/heads/main/com.briis.meteoalarm/drivers/region/assets/images/small.png) MeteoAlarm for Homey
 
 A [Homey](https://homey.app) app that brings European weather warnings from
 [MeteoAlarm](https://meteoalarm.org) (EUMETNET) into Homey — as a device
 with an alarm capability, plus Flow triggers and conditions for automating
 around active warnings.
-
-It's a Homey SDK v3 port of the Home Assistant integration
-[briis/meteoalarm](https://github.com/briis/meteoalarm), built to match its
-upstream behaviour (the `meteoalertapi` PyPI package) exactly.
 
 The app itself lives in [`com.briis.meteoalarm/`](com.briis.meteoalarm/).
 
