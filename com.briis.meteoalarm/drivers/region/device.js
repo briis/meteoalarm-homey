@@ -51,7 +51,13 @@ class RegionDevice extends Homey.Device {
     await this.setCapabilityValue('alarm_weather_warning', isActive).catch(this.error);
     await this.setCapabilityValue('meteoalarm_awareness_level', level).catch(this.error);
     await this.setCapabilityValue('meteoalarm_severity', isActive ? (alert.severity || '') : '').catch(this.error);
-    await this.setCapabilityValue('meteoalarm_expires', isActive ? this._formatExpires(alert.expires) : '').catch(this.error);
+    await this.setCapabilityValue('meteoalarm_expires', isActive ? this._formatDateTime(alert.expires) : '').catch(this.error);
+    await this.setCapabilityValue('meteoalarm_event', isActive ? (alert.event || '') : '').catch(this.error);
+    await this.setCapabilityValue('meteoalarm_urgency', isActive ? (alert.urgency || '') : '').catch(this.error);
+    await this.setCapabilityValue('meteoalarm_certainty', isActive ? (alert.certainty || '') : '').catch(this.error);
+    await this.setCapabilityValue('meteoalarm_effective', isActive ? this._formatDateTime(alert.effective) : '').catch(this.error);
+    await this.setCapabilityValue('meteoalarm_headline', isActive ? (alert.headline || '') : '').catch(this.error);
+    await this.setCapabilityValue('meteoalarm_description', isActive ? (alert.description || '') : '').catch(this.error);
 
     if (isActive && !this._wasActive) {
       await this._flowTrigger('alert_started', alert);
@@ -69,10 +75,10 @@ class RegionDevice extends Homey.Device {
     this._wasActive = isActive;
   }
 
-  _formatExpires(expiresIso) {
-    if (!expiresIso) return '';
-    const date = new Date(expiresIso);
-    if (Number.isNaN(date.getTime())) return expiresIso; // fall back to raw value if unparsable
+  _formatDateTime(iso) {
+    if (!iso) return '';
+    const date = new Date(iso);
+    if (Number.isNaN(date.getTime())) return iso; // fall back to raw value if unparsable
 
     let timeZone;
     try {

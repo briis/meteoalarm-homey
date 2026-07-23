@@ -23,8 +23,14 @@ polls MeteoAlarm's official feed for that region and exposes:
 | - | - |
 | Weather Alert | On when there is an active MeteoAlarm warning for this region |
 | Awareness level | 1 = Green (no warning), 2 = Yellow, 3 = Orange, 4 = Red |
+| Event | The type of weather event, e.g. "Rain warning" |
+| Headline | Short summary of the current alert |
 | Alert severity | The severity text from the alert (e.g. "Severe") |
+| Urgency | How quickly the alert requires action |
+| Certainty | How certain the alerted event is to occur |
+| Effective | When the current alert was issued, in local time |
 | Expires | When the current alert is expected to expire, in local time |
+| Description | Full description of the current alert |
 
 ## Flow cards
 

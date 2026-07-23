@@ -1,0 +1,39 @@
+{
+  "pair": {
+    "title": "Add a MeteoAlarm region",
+    "country": {
+      "label": "Country",
+      "placeholder": "e.g. denmark",
+      "hint": "English country name, lowercase, hyphenated - exactly as it appears at https://feeds.meteoalarm.org/ (e.g. \"bosnia-herzegovina\")."
+    },
+    "province": {
+      "label": "Province",
+      "placeholder": "e.g. Hovedstaden",
+      "hint": "Province/region name as it appears in that country's feed. This can't be fully verified here - MeteoAlarm only lists a region in the feed while it has an active alert, so during calm weather there's nothing to check against. Double-check the exact spelling at https://saratoga-weather.org/meteoalarm-map/ (EMMA_ID region explorer) if unsure."
+    },
+    "language": {
+      "label": "Language",
+      "placeholder": "e.g. en, en-GB, da, da-DK",
+      "hint": "ISO language code for alert text. Matched as a substring, so \"da\" also matches \"da-DK\". Leave as \"en\" for English."
+    },
+    "name": {
+      "label": "Name (optional)",
+      "placeholder": "Custom device name"
+    },
+    "continue": "Continue",
+    "error": {
+      "fillBoth": "Please fill in both country and province.",
+      "validateFailed": "Could not validate: ",
+      "unrecognizedCountry": "Unrecognized country \"{{country}}\" - check the spelling against feeds.meteoalarm.org.",
+      "generic": "Error: "
+    },
+    "info": {
+      "matchFound": "Match found - \"{{areaDesc}}\" currently has an active alert.",
+      "noActiveAlerts": "Country recognized. No regions in {{country}} currently have an active alert, so the province name could not be double-checked - proceeding on your entry as-is.",
+      "noMatch": "Country recognized, but \"{{province}}\" did not match any of the {{count}} region(s) with an active alert right now. This may just mean your region is calm - proceeding on your entry as-is."
+    },
+    "suggestions": {
+      "summary": "{{count}} region(s) currently have an active alert in this country - tap one to use it"
+    }
+  }
+}

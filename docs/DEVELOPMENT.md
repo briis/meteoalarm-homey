@@ -90,6 +90,27 @@ elements at all. Consequences:
   weather, use MeteoAlarm's own EMMA_ID region explorer
   (https://saratoga-weather.org/meteoalarm-map/) rather than the feed.
 
+## Localization
+
+Supported locales: `en`, `da`, `de`, `fr`, `es`. Homey resolves translatable
+strings by the Home's language setting, falling back to `en` for any locale
+not present. Two separate mechanisms are involved:
+
+- `app.json` fields (driver name, capability titles/desc, settings, Flow
+  triggers/conditions/tokens) carry all five locale keys inline. When adding
+  a new capability or Flow card, add all five, not just `en`.
+- `drivers/region/pair/start.html` (the custom pairing screen) is *not*
+  covered by `app.json` — it pulls its labels/hints/messages at runtime via
+  Homey's pair-view `Homey.__('key', tags)` helper, reading from
+  `locales/<lang>.json`. Static text is set via `textContent`/`placeholder`
+  on page load (see the `<script>` block); dynamic messages (validation
+  errors, match results, the suggestions summary) pass a `tags` object for
+  `{{token}}` interpolation, e.g. `Homey.__('pair.info.matchFound', { areaDesc })`.
+
+When adding a new pair-view string: add the key to all five files under
+`locales/`, not just `en.json` — Homey doesn't warn about missing keys in
+other locales, it just silently falls back to English for that string.
+
 ## Deliberate deviations from upstream
 
 - Province name is regex-escaped before matching (upstream doesn't escape

@@ -1,0 +1,39 @@
+{
+  "pair": {
+    "title": "MeteoAlarm-Region hinzufügen",
+    "country": {
+      "label": "Land",
+      "placeholder": "z. B. denmark",
+      "hint": "Englischer Ländername, klein geschrieben, mit Bindestrichen - genau wie auf https://feeds.meteoalarm.org/ (z. B. \"bosnia-herzegovina\")."
+    },
+    "province": {
+      "label": "Provinz",
+      "placeholder": "z. B. Hovedstaden",
+      "hint": "Provinz-/Regionsname, wie er im Feed des Landes erscheint. Dies kann hier nicht vollständig überprüft werden - MeteoAlarm listet eine Region im Feed nur auf, solange eine aktive Warnung besteht, sodass bei ruhigem Wetter nichts zum Abgleichen vorhanden ist. Überprüfen Sie die genaue Schreibweise bei Unsicherheit auf https://saratoga-weather.org/meteoalarm-map/ (EMMA_ID-Regionsexplorer)."
+    },
+    "language": {
+      "label": "Sprache",
+      "placeholder": "z. B. en, en-GB, da, da-DK",
+      "hint": "ISO-Sprachcode für den Warntext. Wird als Teilzeichenfolge abgeglichen, sodass \"da\" auch \"da-DK\" entspricht. Für Englisch bei \"en\" belassen."
+    },
+    "name": {
+      "label": "Name (optional)",
+      "placeholder": "Benutzerdefinierter Gerätename"
+    },
+    "continue": "Weiter",
+    "error": {
+      "fillBoth": "Bitte Land und Provinz ausfüllen.",
+      "validateFailed": "Überprüfung fehlgeschlagen: ",
+      "unrecognizedCountry": "Unbekanntes Land \"{{country}}\" - Schreibweise auf feeds.meteoalarm.org prüfen.",
+      "generic": "Fehler: "
+    },
+    "info": {
+      "matchFound": "Übereinstimmung gefunden - \"{{areaDesc}}\" hat derzeit eine aktive Warnung.",
+      "noActiveAlerts": "Land erkannt. Keine Region in {{country}} hat derzeit eine aktive Warnung, daher konnte der Provinzname nicht überprüft werden - Ihre Eingabe wird unverändert übernommen.",
+      "noMatch": "Land erkannt, aber \"{{province}}\" stimmte mit keiner der {{count}} Region(en) mit einer derzeit aktiven Warnung überein. Das kann einfach bedeuten, dass in Ihrer Region ruhiges Wetter herrscht - Ihre Eingabe wird unverändert übernommen."
+    },
+    "suggestions": {
+      "summary": "{{count}} Region(en) haben derzeit eine aktive Warnung in diesem Land - tippen Sie eine an, um sie zu verwenden"
+    }
+  }
+}

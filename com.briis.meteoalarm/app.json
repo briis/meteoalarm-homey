@@ -1,6 +1,6 @@
 {
   "id": "com.briis.meteoalarm",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "compatibility": ">=8.0.0",
   "sdk": 3,
   "platforms": [
@@ -10,7 +10,11 @@
     "en": "MeteoAlarm"
   },
   "description": {
-    "en": "European weather warnings from MeteoAlarm (EUMETNET)"
+    "en": "European weather warnings from MeteoAlarm (EUMETNET)",
+    "da": "Europæiske vejrvarsler fra MeteoAlarm (EUMETNET)",
+    "de": "Europäische Wetterwarnungen von MeteoAlarm (EUMETNET)",
+    "fr": "Alertes météorologiques européennes de MeteoAlarm (EUMETNET)",
+    "es": "Avisos meteorológicos europeos de MeteoAlarm (EUMETNET)"
   },
   "category": [
     "climate"
@@ -22,6 +26,34 @@
       "warning",
       "meteoalarm",
       "europe"
+    ],
+    "da": [
+      "vejr",
+      "alarm",
+      "varsel",
+      "meteoalarm",
+      "europa"
+    ],
+    "de": [
+      "wetter",
+      "alarm",
+      "warnung",
+      "meteoalarm",
+      "europa"
+    ],
+    "fr": [
+      "météo",
+      "alerte",
+      "avertissement",
+      "meteoalarm",
+      "europe"
+    ],
+    "es": [
+      "clima",
+      "alerta",
+      "aviso",
+      "meteoalarm",
+      "europa"
     ]
   },
   "brandColor": "#E67300",
@@ -40,19 +72,33 @@
     {
       "id": "region",
       "name": {
-        "en": "Alert Region"
+        "en": "Alert Region",
+        "da": "Varselregion",
+        "de": "Warnregion",
+        "fr": "Région d'alerte",
+        "es": "Región de alertas"
       },
       "class": "sensor",
       "capabilities": [
         "alarm_weather_warning",
         "meteoalarm_awareness_level",
+        "meteoalarm_event",
+        "meteoalarm_headline",
         "meteoalarm_severity",
-        "meteoalarm_expires"
+        "meteoalarm_urgency",
+        "meteoalarm_certainty",
+        "meteoalarm_effective",
+        "meteoalarm_expires",
+        "meteoalarm_description"
       ],
       "capabilitiesOptions": {
         "alarm_weather_warning": {
           "title": {
-            "en": "Alert active"
+            "en": "Alert active",
+            "da": "Varsel aktivt",
+            "de": "Warnung aktiv",
+            "fr": "Alerte active",
+            "es": "Aviso activo"
           }
         }
       },
@@ -90,10 +136,18 @@
           "id": "poll_interval",
           "type": "number",
           "label": {
-            "en": "Polling interval (minutes)"
+            "en": "Polling interval (minutes)",
+            "da": "Opdateringsinterval (minutter)",
+            "de": "Abfrageintervall (Minuten)",
+            "fr": "Intervalle d'interrogation (minutes)",
+            "es": "Intervalo de consulta (minutos)"
           },
           "hint": {
-            "en": "How often to check for this region. The HA integration this is ported from polls every 5 minutes by default."
+            "en": "How often to check for this region. The HA integration this is ported from polls every 5 minutes by default.",
+            "da": "Hvor ofte der tjekkes for denne region. Den Home Assistant-integration, appen er porteret fra, tjekker som standard hvert 5. minut.",
+            "de": "Wie oft für diese Region geprüft wird. Die Home-Assistant-Integration, von der diese App portiert wurde, prüft standardmäßig alle 5 Minuten.",
+            "fr": "À quelle fréquence cette région est vérifiée. L'intégration Home Assistant dont cette application est portée vérifie par défaut toutes les 5 minutes.",
+            "es": "Con qué frecuencia se comprueba esta región. La integración de Home Assistant de la que se ha portado esta aplicación comprueba cada 5 minutos de forma predeterminada."
           },
           "value": 5,
           "min": 1,
@@ -106,10 +160,18 @@
     "alarm_weather_warning": {
       "type": "boolean",
       "title": {
-        "en": "Weather Alert"
+        "en": "Weather Alert",
+        "da": "Vejrvarsel",
+        "de": "Wetterwarnung",
+        "fr": "Alerte météo",
+        "es": "Aviso meteorológico"
       },
       "desc": {
-        "en": "On when there is an active MeteoAlarm warning for this region"
+        "en": "On when there is an active MeteoAlarm warning for this region",
+        "da": "Aktiveret når der er et aktivt MeteoAlarm-varsel for denne region",
+        "de": "Aktiv, wenn für diese Region eine aktive MeteoAlarm-Warnung vorliegt",
+        "fr": "Activé lorsqu'une alerte MeteoAlarm est active pour cette région",
+        "es": "Activo cuando hay un aviso de MeteoAlarm activo para esta región"
       },
       "getable": true,
       "setable": false,
@@ -120,10 +182,18 @@
     "meteoalarm_awareness_level": {
       "type": "number",
       "title": {
-        "en": "Awareness level"
+        "en": "Awareness level",
+        "da": "Varslingsniveau",
+        "de": "Warnstufe",
+        "fr": "Niveau d'alerte",
+        "es": "Nivel de aviso"
       },
       "desc": {
-        "en": "1=Green (no warning), 2=Yellow, 3=Orange, 4=Red"
+        "en": "1=Green (no warning), 2=Yellow, 3=Orange, 4=Red",
+        "da": "1=Grøn (intet varsel), 2=Gul, 3=Orange, 4=Rød",
+        "de": "1=Grün (keine Warnung), 2=Gelb, 3=Orange, 4=Rot",
+        "fr": "1=Vert (aucune alerte), 2=Jaune, 3=Orange, 4=Rouge",
+        "es": "1=Verde (sin aviso), 2=Amarillo, 3=Naranja, 4=Rojo"
       },
       "min": 1,
       "max": 4,
@@ -136,7 +206,11 @@
     "meteoalarm_severity": {
       "type": "string",
       "title": {
-        "en": "Alert severity"
+        "en": "Alert severity",
+        "da": "Alvorlighedsgrad",
+        "de": "Schweregrad",
+        "fr": "Gravité de l'alerte",
+        "es": "Gravedad del aviso"
       },
       "getable": true,
       "setable": false,
@@ -146,15 +220,149 @@
     "meteoalarm_expires": {
       "type": "string",
       "title": {
-        "en": "Expires"
+        "en": "Expires",
+        "da": "Udløber",
+        "de": "Läuft ab",
+        "fr": "Expire",
+        "es": "Expira"
       },
       "desc": {
-        "en": "When the current alert is expected to expire, in local time"
+        "en": "When the current alert is expected to expire, in local time",
+        "da": "Hvornår det aktuelle varsel forventes at udløbe, i lokal tid",
+        "de": "Wann die aktuelle Warnung voraussichtlich abläuft, in Ortszeit",
+        "fr": "Quand l'alerte actuelle devrait expirer, en heure locale",
+        "es": "Cuándo se espera que expire el aviso actual, en hora local"
       },
       "getable": true,
       "setable": false,
       "uiComponent": "sensor",
       "icon": "/assets/capabilities/expires.svg"
+    },
+    "meteoalarm_event": {
+      "type": "string",
+      "title": {
+        "en": "Event",
+        "da": "Hændelse",
+        "de": "Ereignis",
+        "fr": "Événement",
+        "es": "Evento"
+      },
+      "desc": {
+        "en": "The type of weather event, e.g. \"Rain warning\"",
+        "da": "Typen af vejrhændelse, f.eks. \"Regnvarsel\"",
+        "de": "Die Art des Wetterereignisses, z. B. \"Regenwarnung\"",
+        "fr": "Le type d'événement météorologique, par ex. « Alerte pluie »",
+        "es": "El tipo de evento meteorológico, p. ej. «Aviso de lluvia»"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/event.svg"
+    },
+    "meteoalarm_urgency": {
+      "type": "string",
+      "title": {
+        "en": "Urgency",
+        "da": "Hastegrad",
+        "de": "Dringlichkeit",
+        "fr": "Urgence",
+        "es": "Urgencia"
+      },
+      "desc": {
+        "en": "How quickly the alert requires action",
+        "da": "Hvor hurtigt varslet kræver handling",
+        "de": "Wie schnell die Warnung ein Handeln erfordert",
+        "fr": "À quelle vitesse l'alerte nécessite une action",
+        "es": "Con qué rapidez el aviso requiere actuar"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/urgency.svg"
+    },
+    "meteoalarm_certainty": {
+      "type": "string",
+      "title": {
+        "en": "Certainty",
+        "da": "Sikkerhed",
+        "de": "Gewissheit",
+        "fr": "Certitude",
+        "es": "Certeza"
+      },
+      "desc": {
+        "en": "How certain the alerted event is to occur",
+        "da": "Hvor sikkert det er, at den varslede hændelse indtræffer",
+        "de": "Wie sicher es ist, dass das gemeldete Ereignis eintritt",
+        "fr": "Degré de certitude que l'événement annoncé se produise",
+        "es": "Qué tan seguro es que ocurra el evento anunciado"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/certainty.svg"
+    },
+    "meteoalarm_effective": {
+      "type": "string",
+      "title": {
+        "en": "Effective",
+        "da": "Udstedt",
+        "de": "Ausgestellt",
+        "fr": "Émis",
+        "es": "Emitido"
+      },
+      "desc": {
+        "en": "When the current alert was issued, in local time",
+        "da": "Hvornår det aktuelle varsel blev udstedt, i lokal tid",
+        "de": "Wann die aktuelle Warnung ausgestellt wurde, in Ortszeit",
+        "fr": "Quand l'alerte actuelle a été émise, en heure locale",
+        "es": "Cuándo se emitió el aviso actual, en hora local"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/effective.svg"
+    },
+    "meteoalarm_headline": {
+      "type": "string",
+      "title": {
+        "en": "Headline",
+        "da": "Overskrift",
+        "de": "Überschrift",
+        "fr": "Titre",
+        "es": "Titular"
+      },
+      "desc": {
+        "en": "Short summary of the current alert",
+        "da": "Kort resumé af det aktuelle varsel",
+        "de": "Kurze Zusammenfassung der aktuellen Warnung",
+        "fr": "Résumé court de l'alerte actuelle",
+        "es": "Resumen breve del aviso actual"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/headline.svg"
+    },
+    "meteoalarm_description": {
+      "type": "string",
+      "title": {
+        "en": "Description",
+        "da": "Beskrivelse",
+        "de": "Beschreibung",
+        "fr": "Description",
+        "es": "Descripción"
+      },
+      "desc": {
+        "en": "Full description of the current alert",
+        "da": "Fuld beskrivelse af det aktuelle varsel",
+        "de": "Vollständige Beschreibung der aktuellen Warnung",
+        "fr": "Description complète de l'alerte actuelle",
+        "es": "Descripción completa del aviso actual"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/description.svg"
     }
   },
   "flow": {
@@ -162,10 +370,18 @@
       {
         "id": "alert_started",
         "title": {
-          "en": "A weather alert started"
+          "en": "A weather alert started",
+          "da": "Et vejrvarsel er startet",
+          "de": "Eine Wetterwarnung hat begonnen",
+          "fr": "Une alerte météo a commencé",
+          "es": "Ha comenzado un aviso meteorológico"
         },
         "titleFormatted": {
-          "en": "A weather alert started"
+          "en": "A weather alert started",
+          "da": "Et vejrvarsel er startet",
+          "de": "Eine Wetterwarnung hat begonnen",
+          "fr": "Une alerte météo a commencé",
+          "es": "Ha comenzado un aviso meteorológico"
         },
         "args": [
           {
@@ -179,70 +395,110 @@
             "name": "headline",
             "type": "string",
             "title": {
-              "en": "Headline"
+              "en": "Headline",
+              "da": "Overskrift",
+              "de": "Überschrift",
+              "fr": "Titre",
+              "es": "Titular"
             }
           },
           {
             "name": "description",
             "type": "string",
             "title": {
-              "en": "Description"
+              "en": "Description",
+              "da": "Beskrivelse",
+              "de": "Beschreibung",
+              "fr": "Description",
+              "es": "Descripción"
             }
           },
           {
             "name": "event",
             "type": "string",
             "title": {
-              "en": "Event"
+              "en": "Event",
+              "da": "Hændelse",
+              "de": "Ereignis",
+              "fr": "Événement",
+              "es": "Evento"
             }
           },
           {
             "name": "severity",
             "type": "string",
             "title": {
-              "en": "Severity"
+              "en": "Severity",
+              "da": "Alvorlighed",
+              "de": "Schweregrad",
+              "fr": "Gravité",
+              "es": "Gravedad"
             }
           },
           {
             "name": "urgency",
             "type": "string",
             "title": {
-              "en": "Urgency"
+              "en": "Urgency",
+              "da": "Hastegrad",
+              "de": "Dringlichkeit",
+              "fr": "Urgence",
+              "es": "Urgencia"
             }
           },
           {
             "name": "certainty",
             "type": "string",
             "title": {
-              "en": "Certainty"
+              "en": "Certainty",
+              "da": "Sikkerhed",
+              "de": "Gewissheit",
+              "fr": "Certitude",
+              "es": "Certeza"
             }
           },
           {
             "name": "instruction",
             "type": "string",
             "title": {
-              "en": "Instruction"
+              "en": "Instruction",
+              "da": "Instruktion",
+              "de": "Anweisung",
+              "fr": "Instruction",
+              "es": "Instrucción"
             }
           },
           {
             "name": "awareness_level",
             "type": "number",
             "title": {
-              "en": "Awareness level"
+              "en": "Awareness level",
+              "da": "Varslingsniveau",
+              "de": "Warnstufe",
+              "fr": "Niveau d'alerte",
+              "es": "Nivel de aviso"
             }
           },
           {
             "name": "onset",
             "type": "string",
             "title": {
-              "en": "Onset"
+              "en": "Onset",
+              "da": "Starttidspunkt",
+              "de": "Beginn",
+              "fr": "Début",
+              "es": "Inicio"
             }
           },
           {
             "name": "expires",
             "type": "string",
             "title": {
-              "en": "Expires"
+              "en": "Expires",
+              "da": "Udløber",
+              "de": "Läuft ab",
+              "fr": "Expire",
+              "es": "Expira"
             }
           }
         ]
@@ -250,10 +506,18 @@
       {
         "id": "alert_ended",
         "title": {
-          "en": "A weather alert ended"
+          "en": "A weather alert ended",
+          "da": "Et vejrvarsel er afsluttet",
+          "de": "Eine Wetterwarnung ist beendet",
+          "fr": "Une alerte météo s'est terminée",
+          "es": "Ha finalizado un aviso meteorológico"
         },
         "titleFormatted": {
-          "en": "A weather alert ended"
+          "en": "A weather alert ended",
+          "da": "Et vejrvarsel er afsluttet",
+          "de": "Eine Wetterwarnung ist beendet",
+          "fr": "Une alerte météo s'est terminée",
+          "es": "Ha finalizado un aviso meteorológico"
         },
         "args": [
           {
@@ -266,10 +530,18 @@
       {
         "id": "alert_level_changed",
         "title": {
-          "en": "Awareness level changed"
+          "en": "Awareness level changed",
+          "da": "Varslingsniveau ændret",
+          "de": "Warnstufe geändert",
+          "fr": "Niveau d'alerte modifié",
+          "es": "Nivel de aviso cambiado"
         },
         "titleFormatted": {
-          "en": "Awareness level changed to [[awareness_level]]"
+          "en": "Awareness level changed to [[awareness_level]]",
+          "da": "Varslingsniveau ændret til [[awareness_level]]",
+          "de": "Warnstufe geändert zu [[awareness_level]]",
+          "fr": "Niveau d'alerte changé à [[awareness_level]]",
+          "es": "Nivel de aviso cambiado a [[awareness_level]]"
         },
         "args": [
           {
@@ -283,7 +555,11 @@
             "name": "awareness_level",
             "type": "number",
             "title": {
-              "en": "Awareness level"
+              "en": "Awareness level",
+              "da": "Varslingsniveau",
+              "de": "Warnstufe",
+              "fr": "Niveau d'alerte",
+              "es": "Nivel de aviso"
             }
           }
         ]
@@ -293,7 +569,11 @@
       {
         "id": "alert_is_active",
         "title": {
-          "en": "Alert !{{is|is not}} active"
+          "en": "Alert !{{is|is not}} active",
+          "da": "Varsel !{{er|er ikke}} aktivt",
+          "de": "Warnung !{{ist|ist nicht}} aktiv",
+          "fr": "L'alerte !{{est|n'est pas}} active",
+          "es": "El aviso !{{está|no está}} activo"
         },
         "args": [
           {
@@ -306,10 +586,18 @@
       {
         "id": "awareness_level_at_least",
         "title": {
-          "en": "Awareness level !{{is|is not}} at least [[level]]"
+          "en": "Awareness level !{{is|is not}} at least [[level]]",
+          "da": "Varslingsniveau !{{er|er ikke}} mindst [[level]]",
+          "de": "Warnstufe !{{ist|ist nicht}} mindestens [[level]]",
+          "fr": "Le niveau d'alerte !{{est|n'est pas}} au moins [[level]]",
+          "es": "El nivel de aviso !{{es|no es}} al menos [[level]]"
         },
         "titleFormatted": {
-          "en": "Awareness level !{{is|is not}} at least [[level]]"
+          "en": "Awareness level !{{is|is not}} at least [[level]]",
+          "da": "Varslingsniveau !{{er|er ikke}} mindst [[level]]",
+          "de": "Warnstufe !{{ist|ist nicht}} mindestens [[level]]",
+          "fr": "Le niveau d'alerte !{{est|n'est pas}} au moins [[level]]",
+          "es": "El nivel de aviso !{{es|no es}} al menos [[level]]"
         },
         "args": [
           {
@@ -324,19 +612,31 @@
               {
                 "id": "2",
                 "label": {
-                  "en": "2 - Yellow"
+                  "en": "2 - Yellow",
+                  "da": "2 - Gul",
+                  "de": "2 - Gelb",
+                  "fr": "2 - Jaune",
+                  "es": "2 - Amarillo"
                 }
               },
               {
                 "id": "3",
                 "label": {
-                  "en": "3 - Orange"
+                  "en": "3 - Orange",
+                  "da": "3 - Orange",
+                  "de": "3 - Orange",
+                  "fr": "3 - Orange",
+                  "es": "3 - Naranja"
                 }
               },
               {
                 "id": "4",
                 "label": {
-                  "en": "4 - Red"
+                  "en": "4 - Red",
+                  "da": "4 - Rød",
+                  "de": "4 - Rot",
+                  "fr": "4 - Rouge",
+                  "es": "4 - Rojo"
                 }
               }
             ]

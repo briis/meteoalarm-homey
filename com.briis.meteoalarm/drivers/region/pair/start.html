@@ -16,44 +16,45 @@
   </style>
 </head>
 <body>
-  <h2>Add a MeteoAlarm region</h2>
+  <h2 id="pageTitle"></h2>
 
-  <label>Country</label>
-  <input id="country" placeholder="e.g. denmark" />
-  <div class="hint">
-    English country name, lowercase, hyphenated - exactly as it appears at
-    https://feeds.meteoalarm.org/ (e.g. "bosnia-herzegovina").
-  </div>
+  <label id="countryLabel"></label>
+  <input id="country" />
+  <div class="hint" id="countryHint"></div>
 
-  <label>Province</label>
-  <input id="province" placeholder="e.g. Hovedstaden" />
-  <div class="hint">
-    Province/region name as it appears in that country's feed. This can't be
-    fully verified here - MeteoAlarm only lists a region in the feed while it
-    has an active alert, so during calm weather there's nothing to check
-    against. Double-check the exact spelling at
-    https://saratoga-weather.org/meteoalarm-map/ (EMMA_ID region explorer) if
-    unsure.
-  </div>
+  <label id="provinceLabel"></label>
+  <input id="province" />
+  <div class="hint" id="provinceHint"></div>
 
-  <label>Language</label>
-  <input id="language" placeholder="e.g. en, en-GB, da, da-DK" value="en" />
-  <div class="hint">
-    ISO language code for alert text. Matched as a substring, so "da" also
-    matches "da-DK". Leave as "en" for English.
-  </div>
+  <label id="languageLabel"></label>
+  <input id="language" value="en" />
+  <div class="hint" id="languageHint"></div>
 
-  <label>Name (optional)</label>
-  <input id="name" placeholder="Custom device name" />
+  <label id="nameLabel"></label>
+  <input id="name" />
 
   <div id="error" class="error"></div>
   <div id="info" class="info"></div>
   <div id="suggestions"></div>
 
-  <button id="continueBtn" class="homey-button-primary-full">Continue</button>
+  <button id="continueBtn" class="homey-button-primary-full"></button>
 
   <script type="text/javascript">
     Homey.setTitle('MeteoAlarm');
+
+    document.getElementById('pageTitle').textContent = Homey.__('pair.title');
+    document.getElementById('countryLabel').textContent = Homey.__('pair.country.label');
+    document.getElementById('country').placeholder = Homey.__('pair.country.placeholder');
+    document.getElementById('countryHint').textContent = Homey.__('pair.country.hint');
+    document.getElementById('provinceLabel').textContent = Homey.__('pair.province.label');
+    document.getElementById('province').placeholder = Homey.__('pair.province.placeholder');
+    document.getElementById('provinceHint').textContent = Homey.__('pair.province.hint');
+    document.getElementById('languageLabel').textContent = Homey.__('pair.language.label');
+    document.getElementById('language').placeholder = Homey.__('pair.language.placeholder');
+    document.getElementById('languageHint').textContent = Homey.__('pair.language.hint');
+    document.getElementById('nameLabel').textContent = Homey.__('pair.name.label');
+    document.getElementById('name').placeholder = Homey.__('pair.name.placeholder');
+    document.getElementById('continueBtn').textContent = Homey.__('pair.continue');
 
     function showSuggestions(available) {
       const box = document.getElementById('suggestions');
@@ -64,7 +65,7 @@
       const items = available.map((a) => '<li>' + a.replace(/</g, '&lt;') + '</li>').join('');
       box.innerHTML =
         '<details class="suggestions" open>' +
-        '<summary>' + available.length + ' region(s) currently have an active alert in this country - tap one to use it</summary>' +
+        '<summary>' + Homey.__('pair.suggestions.summary', { count: available.length }) + '</summary>' +
         '<ul>' + items + '</ul>' +
         '</details>';
       box.querySelectorAll('li').forEach((li, i) => {
@@ -86,31 +87,31 @@
       showSuggestions(null);
 
       if (!country || !province) {
-        errorEl.textContent = 'Please fill in both country and province.';
+        errorEl.textContent = Homey.__('pair.error.fillBoth');
         return;
       }
 
       try {
         const result = await Homey.emit('validate', { country, province, language, name });
         if (!result.ok) {
-          errorEl.textContent = 'Could not validate: ' + result.error;
+          errorEl.textContent = Homey.__('pair.error.validateFailed') + result.error;
           return;
         }
         if (!result.countryValid) {
-          errorEl.textContent = 'Unrecognized country "' + country + '" - check the spelling against feeds.meteoalarm.org.';
+          errorEl.textContent = Homey.__('pair.error.unrecognizedCountry', { country });
           return;
         }
         if (result.matched) {
-          infoEl.textContent = 'Match found - "' + result.areaDesc + '" currently has an active alert.';
+          infoEl.textContent = Homey.__('pair.info.matchFound', { areaDesc: result.areaDesc });
         } else if (result.entryCount === 0) {
-          infoEl.textContent = 'Country recognized. No regions in ' + country + ' currently have an active alert, so the province name could not be double-checked - proceeding on your entry as-is.';
+          infoEl.textContent = Homey.__('pair.info.noActiveAlerts', { country });
         } else {
-          infoEl.textContent = 'Country recognized, but "' + province + '" did not match any of the ' + result.entryCount + ' region(s) with an active alert right now. This may just mean your region is calm - proceeding on your entry as-is.';
+          infoEl.textContent = Homey.__('pair.info.noMatch', { province, count: result.entryCount });
           showSuggestions(result.available);
         }
         Homey.showView('list_devices');
       } catch (err) {
-        errorEl.textContent = 'Error: ' + (err.message || err);
+        errorEl.textContent = Homey.__('pair.error.generic') + (err.message || err);
       }
     });
   </script>

@@ -1,0 +1,39 @@
+{
+  "pair": {
+    "title": "Tilføj en MeteoAlarm-region",
+    "country": {
+      "label": "Land",
+      "placeholder": "f.eks. denmark",
+      "hint": "Landets engelske navn, med små bogstaver og bindestreg - præcis som det står på https://feeds.meteoalarm.org/ (f.eks. \"bosnia-herzegovina\")."
+    },
+    "province": {
+      "label": "Provins",
+      "placeholder": "f.eks. Hovedstaden",
+      "hint": "Provins-/regionnavn som det står i landets feed. Dette kan ikke bekræftes fuldt ud her - MeteoAlarm viser kun en region i feedet, når den har et aktivt varsel, så i roligt vejr er der intet at tjekke imod. Dobbelttjek den præcise stavemåde på https://saratoga-weather.org/meteoalarm-map/ (EMMA_ID-regionsudforsker), hvis du er i tvivl."
+    },
+    "language": {
+      "label": "Sprog",
+      "placeholder": "f.eks. en, en-GB, da, da-DK",
+      "hint": "ISO-sprogkode for varselteksten. Matches som en delstreng, så \"da\" matcher også \"da-DK\". Lad stå som \"en\" for engelsk."
+    },
+    "name": {
+      "label": "Navn (valgfrit)",
+      "placeholder": "Brugerdefineret enhedsnavn"
+    },
+    "continue": "Fortsæt",
+    "error": {
+      "fillBoth": "Udfyld venligst både land og provins.",
+      "validateFailed": "Kunne ikke validere: ",
+      "unrecognizedCountry": "Ukendt land \"{{country}}\" - tjek stavemåden på feeds.meteoalarm.org.",
+      "generic": "Fejl: "
+    },
+    "info": {
+      "matchFound": "Match fundet - \"{{areaDesc}}\" har i øjeblikket et aktivt varsel.",
+      "noActiveAlerts": "Landet blev genkendt. Ingen regioner i {{country}} har i øjeblikket et aktivt varsel, så provinsnavnet kunne ikke dobbelttjekkes - fortsætter med din indtastning som den er.",
+      "noMatch": "Landet blev genkendt, men \"{{province}}\" matchede ingen af de {{count}} region(er) med et aktivt varsel lige nu. Det kan blot betyde, at din region har roligt vejr - fortsætter med din indtastning som den er."
+    },
+    "suggestions": {
+      "summary": "{{count}} region(er) har i øjeblikket et aktivt varsel i dette land - tryk på en for at bruge den"
+    }
+  }
+}

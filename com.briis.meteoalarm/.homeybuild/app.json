@@ -1,6 +1,6 @@
 {
   "id": "com.briis.meteoalarm",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "compatibility": ">=8.0.0",
   "sdk": 3,
   "platforms": [
@@ -46,8 +46,14 @@
       "capabilities": [
         "alarm_weather_warning",
         "meteoalarm_awareness_level",
+        "meteoalarm_event",
+        "meteoalarm_headline",
         "meteoalarm_severity",
-        "meteoalarm_expires"
+        "meteoalarm_urgency",
+        "meteoalarm_certainty",
+        "meteoalarm_effective",
+        "meteoalarm_expires",
+        "meteoalarm_description"
       ],
       "capabilitiesOptions": {
         "alarm_weather_warning": {
@@ -155,6 +161,84 @@
       "setable": false,
       "uiComponent": "sensor",
       "icon": "/assets/capabilities/expires.svg"
+    },
+    "meteoalarm_event": {
+      "type": "string",
+      "title": {
+        "en": "Event"
+      },
+      "desc": {
+        "en": "The type of weather event, e.g. \"Rain warning\""
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/event.svg"
+    },
+    "meteoalarm_urgency": {
+      "type": "string",
+      "title": {
+        "en": "Urgency"
+      },
+      "desc": {
+        "en": "How quickly the alert requires action"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/urgency.svg"
+    },
+    "meteoalarm_certainty": {
+      "type": "string",
+      "title": {
+        "en": "Certainty"
+      },
+      "desc": {
+        "en": "How certain the alerted event is to occur"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/certainty.svg"
+    },
+    "meteoalarm_effective": {
+      "type": "string",
+      "title": {
+        "en": "Effective"
+      },
+      "desc": {
+        "en": "When the current alert was issued, in local time"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/effective.svg"
+    },
+    "meteoalarm_headline": {
+      "type": "string",
+      "title": {
+        "en": "Headline"
+      },
+      "desc": {
+        "en": "Short summary of the current alert"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/headline.svg"
+    },
+    "meteoalarm_description": {
+      "type": "string",
+      "title": {
+        "en": "Description"
+      },
+      "desc": {
+        "en": "Full description of the current alert"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/description.svg"
     }
   },
   "flow": {
