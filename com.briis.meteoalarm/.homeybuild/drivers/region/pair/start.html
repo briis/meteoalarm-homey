@@ -1,0 +1,118 @@
+<html>
+<head>
+  <style>
+    body { padding: 16px; font-family: sans-serif; }
+    label { display: block; margin-top: 12px; font-weight: 600; }
+    input { width: 100%; padding: 8px; margin-top: 4px; box-sizing: border-box; }
+    .hint { font-size: 12px; color: #888; margin-top: 4px; }
+    .error { color: #c00; margin-top: 12px; }
+    .info { color: #4a9; margin-top: 12px; font-size: 13px; }
+    .suggestions { margin-top: 8px; }
+    .suggestions summary { cursor: pointer; color: #888; font-size: 13px; }
+    .suggestions ul { max-height: 160px; overflow-y: auto; margin: 8px 0 0; padding-left: 18px; }
+    .suggestions li { cursor: pointer; padding: 2px 0; }
+    .suggestions li:hover { text-decoration: underline; }
+    button { margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <h2>Add a MeteoAlarm region</h2>
+
+  <label>Country</label>
+  <input id="country" placeholder="e.g. denmark" />
+  <div class="hint">
+    English country name, lowercase, hyphenated - exactly as it appears at
+    https://feeds.meteoalarm.org/ (e.g. "bosnia-herzegovina").
+  </div>
+
+  <label>Province</label>
+  <input id="province" placeholder="e.g. Hovedstaden" />
+  <div class="hint">
+    Province/region name as it appears in that country's feed. This can't be
+    fully verified here - MeteoAlarm only lists a region in the feed while it
+    has an active alert, so during calm weather there's nothing to check
+    against. Double-check the exact spelling at
+    https://saratoga-weather.org/meteoalarm-map/ (EMMA_ID region explorer) if
+    unsure.
+  </div>
+
+  <label>Language</label>
+  <input id="language" placeholder="e.g. en, en-GB, da, da-DK" value="en" />
+  <div class="hint">
+    ISO language code for alert text. Matched as a substring, so "da" also
+    matches "da-DK". Leave as "en" for English.
+  </div>
+
+  <label>Name (optional)</label>
+  <input id="name" placeholder="Custom device name" />
+
+  <div id="error" class="error"></div>
+  <div id="info" class="info"></div>
+  <div id="suggestions"></div>
+
+  <button id="continueBtn" class="homey-button-primary-full">Continue</button>
+
+  <script type="text/javascript">
+    Homey.setTitle('MeteoAlarm');
+
+    function showSuggestions(available) {
+      const box = document.getElementById('suggestions');
+      if (!available || available.length === 0) {
+        box.innerHTML = '';
+        return;
+      }
+      const items = available.map((a) => '<li>' + a.replace(/</g, '&lt;') + '</li>').join('');
+      box.innerHTML =
+        '<details class="suggestions" open>' +
+        '<summary>' + available.length + ' region(s) currently have an active alert in this country - tap one to use it</summary>' +
+        '<ul>' + items + '</ul>' +
+        '</details>';
+      box.querySelectorAll('li').forEach((li, i) => {
+        li.addEventListener('click', () => {
+          document.getElementById('province').value = available[i];
+        });
+      });
+    }
+
+    document.getElementById('continueBtn').addEventListener('click', async () => {
+      const country = document.getElementById('country').value.trim().toLowerCase();
+      const province = document.getElementById('province').value.trim();
+      const language = document.getElementById('language').value.trim() || 'en';
+      const name = document.getElementById('name').value.trim();
+      const errorEl = document.getElementById('error');
+      const infoEl = document.getElementById('info');
+      errorEl.textContent = '';
+      infoEl.textContent = '';
+      showSuggestions(null);
+
+      if (!country || !province) {
+        errorEl.textContent = 'Please fill in both country and province.';
+        return;
+      }
+
+      try {
+        const result = await Homey.emit('validate', { country, province, language, name });
+        if (!result.ok) {
+          errorEl.textContent = 'Could not validate: ' + result.error;
+          return;
+        }
+        if (!result.countryValid) {
+          errorEl.textContent = 'Unrecognized country "' + country + '" - check the spelling against feeds.meteoalarm.org.';
+          return;
+        }
+        if (result.matched) {
+          infoEl.textContent = 'Match found - "' + result.areaDesc + '" currently has an active alert.';
+        } else if (result.entryCount === 0) {
+          infoEl.textContent = 'Country recognized. No regions in ' + country + ' currently have an active alert, so the province name could not be double-checked - proceeding on your entry as-is.';
+        } else {
+          infoEl.textContent = 'Country recognized, but "' + province + '" did not match any of the ' + result.entryCount + ' region(s) with an active alert right now. This may just mean your region is calm - proceeding on your entry as-is.';
+          showSuggestions(result.available);
+        }
+        Homey.showView('list_devices');
+      } catch (err) {
+        errorEl.textContent = 'Error: ' + (err.message || err);
+      }
+    });
+  </script>
+</body>
+</html>
