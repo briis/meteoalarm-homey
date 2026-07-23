@@ -123,14 +123,12 @@ other locales, it just silently falls back to English for that string.
   weather right now" — upstream's config_flow has the same ambiguity but
   it's more visible here since Homey pairing wants a clear success/fail.
 
-## Testing checklist (verify before trusting a release build)
+## Testing checklist (status as of v1.0.0)
 
-1. **XML parsing shape.** The `fast-xml-parser` config (especially the
-   `isArray` list for `entry`/`link`/`info`/`parameter` in
-   `lib/meteoalarm.js`) was written to mirror Python's `xmltodict` as
-   closely as possible, but XML→JSON edge cases (single vs. repeated
-   elements, attribute handling) are the most likely source of subtle bugs.
-   Sanity-check against a real feed with the debug script:
+1. **XML parsing shape** — ✅ confirmed against a real feed with an active
+   alert (Poland/Kujawsko, live). All fields parsed correctly, including
+   the newer capabilities (event, headline, urgency, certainty, effective).
+   Debug tool for future spot-checks:
    ```
    node scripts/debug-feed.js denmark
    ```
@@ -138,14 +136,17 @@ other locales, it just silently falls back to English for that string.
    ```
    curl https://feeds.meteoalarm.org/feeds/meteoalarm-legacy-atom-denmark
    ```
-2. **End-to-end run.** `npm i -g homey && homey app run` from
-   `com.briis.meteoalarm/` against a real Homey / Homey Self-Hosted Server
-   to confirm pairing, polling, and Flow triggers behave correctly —
-   ideally during a period with an active alert somewhere, to exercise the
-   `alert_started`/`alert_level_changed` paths, not just the calm-weather
-   default state.
-3. **Icons.** Confirm `assets/*.png` / `drivers/region/assets/*.png` are
-   final artwork, not placeholders, before publishing.
+2. **End-to-end run** — ✅ confirmed live via `homey app run` with two
+   paired devices: one region with an active alert (all capabilities
+   populated correctly, `alert_started` fired) and one calm-weather region
+   (all string capabilities correctly blank, awareness level 1, alarm off).
+3. **`alert_ended` / level-decrease path** — ⏳ not yet observed. The
+   active-alert device is expected to clear later; a Flow is set up to
+   notify when it does. Once that fires, spot-check that
+   `meteoalarm_awareness_level` drops back to 1 and the string capabilities
+   clear, not just that the notification itself arrives.
+4. **Icons** — ✅ confirmed final artwork, not placeholders (the "Icons are
+   placeholders" note from early development no longer applies).
 
 ## Extending
 
