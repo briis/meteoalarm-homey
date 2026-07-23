@@ -1,0 +1,253 @@
+{
+  "id": "com.briis.meteoalarm",
+  "version": "0.1.0",
+  "compatibility": ">=8.0.0",
+  "sdk": 3,
+  "platforms": ["local"],
+  "name": {
+    "en": "MeteoAlarm"
+  },
+  "description": {
+    "en": "European weather warnings from MeteoAlarm (EUMETNET)"
+  },
+  "category": ["climate"],
+  "tags": {
+    "en": ["weather", "alert", "warning", "meteoalarm", "europe"]
+  },
+  "brandColor": "#E67300",
+  "author": {
+    "name": "Bjarne"
+  },
+  "contributing": {
+    "donate": {}
+  },
+  "images": {
+    "small": "/assets/images/small.png",
+    "large": "/assets/images/large.png",
+    "xlarge": "/assets/images/xlarge.png"
+  },
+  "drivers": [
+    {
+      "id": "region",
+      "name": {
+        "en": "Alert Region"
+      },
+      "class": "sensor",
+      "capabilities": [
+        "alarm_weather_warning",
+        "meteoalarm_awareness_level",
+        "meteoalarm_severity",
+        "meteoalarm_expires"
+      ],
+      "capabilitiesOptions": {
+        "alarm_weather_warning": {
+          "title": {
+            "en": "Alert active"
+          }
+        }
+      },
+      "platforms": ["local"],
+      "connectivity": ["cloud"],
+      "images": {
+        "small": "/drivers/region/assets/images/small.png",
+        "large": "/drivers/region/assets/images/large.png"
+      },
+      "pair": [
+        {
+          "id": "start",
+          "navigation": {
+            "next": "list_devices"
+          }
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "settings": [
+        {
+          "id": "poll_interval",
+          "type": "number",
+          "label": {
+            "en": "Polling interval (minutes)"
+          },
+          "hint": {
+            "en": "How often to check for this region. The HA integration this is ported from polls every 5 minutes by default."
+          },
+          "value": 5,
+          "min": 1,
+          "max": 180
+        }
+      ]
+    }
+  ],
+  "capabilities": {
+    "alarm_weather_warning": {
+      "type": "boolean",
+      "title": {
+        "en": "Weather Alert"
+      },
+      "desc": {
+        "en": "On when there is an active MeteoAlarm warning for this region"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "insights": true,
+      "icon": "/assets/capabilities/weather_warning.svg"
+    },
+    "meteoalarm_awareness_level": {
+      "type": "number",
+      "title": {
+        "en": "Awareness level"
+      },
+      "desc": {
+        "en": "1=Green (no warning), 2=Yellow, 3=Orange, 4=Red"
+      },
+      "min": 1,
+      "max": 4,
+      "decimals": 0,
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/awareness_level.svg"
+    },
+    "meteoalarm_severity": {
+      "type": "string",
+      "title": {
+        "en": "Alert severity"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/severity.svg"
+    },
+    "meteoalarm_expires": {
+      "type": "string",
+      "title": {
+        "en": "Expires"
+      },
+      "desc": {
+        "en": "When the current alert is expected to expire, in local time"
+      },
+      "getable": true,
+      "setable": false,
+      "uiComponent": "sensor",
+      "icon": "/assets/capabilities/expires.svg"
+    }
+  },
+  "flow": {
+    "triggers": [
+      {
+        "id": "alert_started",
+        "title": {
+          "en": "A weather alert started"
+        },
+        "titleFormatted": {
+          "en": "A weather alert started"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=region"
+          }
+        ],
+        "tokens": [
+          { "name": "headline", "type": "string", "title": { "en": "Headline" } },
+          { "name": "description", "type": "string", "title": { "en": "Description" } },
+          { "name": "event", "type": "string", "title": { "en": "Event" } },
+          { "name": "severity", "type": "string", "title": { "en": "Severity" } },
+          { "name": "urgency", "type": "string", "title": { "en": "Urgency" } },
+          { "name": "certainty", "type": "string", "title": { "en": "Certainty" } },
+          { "name": "instruction", "type": "string", "title": { "en": "Instruction" } },
+          { "name": "awareness_level", "type": "number", "title": { "en": "Awareness level" } },
+          { "name": "onset", "type": "string", "title": { "en": "Onset" } },
+          { "name": "expires", "type": "string", "title": { "en": "Expires" } }
+        ]
+      },
+      {
+        "id": "alert_ended",
+        "title": {
+          "en": "A weather alert ended"
+        },
+        "titleFormatted": {
+          "en": "A weather alert ended"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=region"
+          }
+        ]
+      },
+      {
+        "id": "alert_level_changed",
+        "title": {
+          "en": "Awareness level changed"
+        },
+        "titleFormatted": {
+          "en": "Awareness level changed to [[awareness_level]]"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=region"
+          }
+        ],
+        "tokens": [
+          { "name": "awareness_level", "type": "number", "title": { "en": "Awareness level" } }
+        ]
+      }
+    ],
+    "conditions": [
+      {
+        "id": "alert_is_active",
+        "title": {
+          "en": "Alert !{{is|is not}} active"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=region"
+          }
+        ]
+      },
+      {
+        "id": "awareness_level_at_least",
+        "title": {
+          "en": "Awareness level !{{is|is not}} at least [[level]]"
+        },
+        "titleFormatted": {
+          "en": "Awareness level !{{is|is not}} at least [[level]]"
+        },
+        "args": [
+          {
+            "name": "device",
+            "type": "device",
+            "filter": "driver_id=region"
+          },
+          {
+            "name": "level",
+            "type": "dropdown",
+            "values": [
+              { "id": "2", "label": { "en": "2 - Yellow" } },
+              { "id": "3", "label": { "en": "3 - Orange" } },
+              { "id": "4", "label": { "en": "4 - Red" } }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

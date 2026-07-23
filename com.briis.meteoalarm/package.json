@@ -1,0 +1,10 @@
+{
+  "name": "com.briis.meteoalarm",
+  "version": "0.1.0",
+  "description": "Homey app for MeteoAlarm European weather warnings",
+  "main": "app.js",
+  "license": "MIT",
+  "dependencies": {
+    "fast-xml-parser": "^4.5.0"
+  }
+}
